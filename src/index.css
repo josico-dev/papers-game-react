@@ -3,23 +3,15 @@ html {
     width: 100vw;
 }
 
-body {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    min-height: 100%;
-    margin: 20px;
-}
-
 #root {
-    height: 100%;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     align-content: center;
 }
 
-.navbar-tittle {
-    text-align: center;
-    padding-bottom: 1em;
-    border-bottom: 1px solid black;
+nav {
+    height: 5vh;
 }
 
 .game {
@@ -30,12 +22,64 @@ body {
     align-items: center;
 }
 
-.game-board {
-    display: flex;
+.board {
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 95%;
+}
+
+.game-info {
+    display: block;
+    color: black;
+    text-align: center;
+    border-top: 1px solid black;
+}
+
+.pre-game{
+    overflow-y: auto;
+}
+
+.box {
+    display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.player-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn-add {
+    margin-top: 1em;
+    width: 70%;
+}
+
+.btn-close {
+    margin: 1em;
+}
+
+.word-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+}
+
+.word-form-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.start-game-btn{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 }
 
 .word-list {
@@ -63,31 +107,12 @@ body {
     font-size: 5em;
 }
 
-.game-info {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: black;
-    text-align: center;
-    border-top: 1px solid black;
-}
+
 
 .start-button {
     width: 20%;
 }
 
-.scores {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 3em;
-    align-items: center;
-}
-
-.score {
-    padding-left: 1em;
-}
 
 .current-team {
     text-align: center;
@@ -102,7 +127,7 @@ body {
     /* Envuelve a la siguiente línea cuando no hay suficiente espacio */
 }
 
-.team-form> * {
+.team-form>* {
     padding: 1em;
     /* Añade un padding de 1em a cada elemento secundario */
 }
@@ -112,34 +137,21 @@ body {
     text-align: center;
 }
 
-.words-per-player{
+.words-per-player, .seconds-per-round {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-.words-per-player> * {
-    padding-left: 1em;
-    padding-right: 1em;
+.words-per-player > input{
+    width: 6em;
 }
 
-.words-per-player input {
-    width: 3em;
+.seconds-per-round > input{
+    width: 6em;
 }
 
-.seconds-per-round{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.seconds-per-round> * {
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
-.seconds-per-round input {
-    width: 3em;
-}
 
 /* ARREGLAR CSS DE WORDLIST */

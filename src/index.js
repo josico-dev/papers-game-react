@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { useState } from "react";
 
-class Word extends React.Component {
-    render() {
-        return (
-            <p className='word'>
-                {this.props.word.word}
-            </p>
-        );
-    }
+function Word(props) {
+    return (
+        <p className='word'>
+            {props.word.word}
+        </p>
+    );
 }
 
 class WordList extends React.Component {
@@ -140,9 +138,10 @@ function WordForm(props) {
     for (let i = 0; i < palabrasPorJugadorCount; i++) {
         inputs.push(
             <div key={i}>
-                <label>
-                    Palabra {i + 1} para {currentPlayer}:
+                <label className='form-label'>
+                    Palabra {i + 1}:
                     <input
+                        className='form-control'
                         type="text"
                         value={inputValues[i]}
                         onChange={(e) => handleInputChange(i, e.target.value)}
@@ -153,11 +152,17 @@ function WordForm(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>{currentPlayer}</h3>
-            {inputs}
-            <button type="submit">Siguiente jugador</button>
-        </form>
+        <div className="word-form text-center">
+            <form onSubmit={handleSubmit}>
+                <div className='word-form-2'>
+                    <h3>Introduce las palabras <strong>{currentPlayer}</strong></h3>
+                    {inputs}
+                    <button className='btn btn-primary' type="submit">Siguiente jugador</button>
+                </div>
+
+            </form>
+        </div>
+
     );
 }
 
@@ -219,29 +224,33 @@ function TeamForms(props) {
     }
 
     return (
-        <div>
-            <div className="team-form">
+        <div className='pre-game d-grid gap-5 m-5'>
+            <div className="team-form text-center">
                 <div className="team1-form">
                     <h3>Equipo 1</h3>
                     {teams.team1.players.map((player, i) => {
                         return (
                             <div className="box">
-                                <input
-                                    name="team1"
-                                    type="text"
-                                    placeholder={"Jugador " + (i + 1)}
-                                    value={player}
-                                    onChange={(event) => handleChange(event, "team1", i)}
-                                />
-                                <div className="btn-box">
-                                    {teams.team1.players.length - 1 === i && (
-                                        <button onClick={() => handleAddPlayer("team1")}>Añadir jugador</button>
-                                    )}
+                                <div className="player-input p-1">
+                                    <input
+                                        className="form-control text-center player-input-form"
+                                        name="team1"
+                                        type="text"
+                                        placeholder={"Jugador " + (i + 1)}
+                                        value={player}
+                                        onChange={(event) => handleChange(event, "team1", i)}
+                                    />
                                     {teams.team1.players.length >= 3 && (
-                                        <button className="mr10" onClick={() => handleRemovePlayer("team1", i)}>Eliminar</button>
+                                        <button className="btn btn-close mr10" onClick={() => handleRemovePlayer("team1", i)} aria-label="Eliminar jugador"></button>
                                     )}
-
                                 </div>
+
+
+                                {teams.team1.players.length - 1 === i && (
+                                    <button className="btn-add btn btn-primary" onClick={() => handleAddPlayer("team1")}>Añadir jugador</button>
+                                )}
+
+
                             </div>
                         );
                     })}
@@ -251,38 +260,49 @@ function TeamForms(props) {
                     {teams.team2.players.map((player, i) => {
                         return (
                             <div className="box">
-                                <input
-                                    name="team2"
-                                    type="text"
-                                    placeholder={"Jugador " + (i + 1)}
-                                    value={player}
-                                    onChange={(event) => handleChange(event, "team2", i)}
-                                />
-                                <div className="btn-box">
-                                    {teams.team2.players.length - 1 === i && (
-                                        <button onClick={() => handleAddPlayer("team2")}>Añadir jugador</button>
-                                    )}
+                                <div className='player-input p-1'>
+                                    <input
+                                        className="form-control text-center player-input-form"
+                                        name="team2"
+                                        type="text"
+                                        placeholder={"Jugador " + (i + 1)}
+                                        value={player}
+                                        onChange={(event) => handleChange(event, "team2", i)}
+                                    />
                                     {teams.team2.players.length >= 3 && (
-                                        <button className="mr10" onClick={() => handleRemovePlayer("team2", i)}>Eliminar</button>
+                                        <button className="btn btn-close mr10" onClick={() => handleRemovePlayer("team2", i)} aria-label="Eliminar jugador"></button>
                                     )}
                                 </div>
+
+                                {teams.team2.players.length - 1 === i && (
+                                    <button className="btn-add btn btn-primary" onClick={() => handleAddPlayer("team2")}>Añadir jugador</button>
+                                )}
+
                             </div>
+
                         );
                     })}
                 </div>
-            </div>
-            <div className='words-per-player'>
-                <h3>Palabras por jugador</h3>
-                <input type="number" defaultValue="3" min="1" max="10" onChange={(event) => props.setWordsPerPlayer(event.target.value)} />
-            </div>
-            <div className='seconds-per-round'>
-                <h3>Segundos por ronda</h3>
-                <input type="number" defaultValue="45" min="1" max="600" onChange={(event) => props.setSecondsPerRound(event.target.value)} />
+            </div >
+            <div className='game-settings'>
+                <div className='words-per-player'>
+
+                    <h3>Palabras por jugador</h3>
+                    <input className="form-control " type="number" defaultValue="3" min="1" max="10" onChange={(event) => props.setWordsPerPlayer(event.target.value)} /></div>
+
+
+                <div className='seconds-per-round'>
+
+                    <h3>Segundos por ronda</h3>
+                    <input className='form-control' type="number" defaultValue="45" min="1" max="600" onChange={(event) => props.setSecondsPerRound(event.target.value)} />
+
+
+                </div>
             </div>
             <div className='submit-teams'>
-                <button onClick={submitTeams}>Añadir palabras</button>
+                <button className="btn btn-primary" onClick={submitTeams}>Añadir palabras</button>
             </div>
-        </div>
+        </div >
     );
 }
 
@@ -422,46 +442,51 @@ class Game extends React.Component {
     render() {
         return (
             <div className="game">
+                <div className='board'>
+                    {(this.state.gamePrepared === 0) ? <TeamForms setTeamsGame={this.setTeamsGame} gamePrepared={this.gamePrepared} setWordsPerPlayer={this.setWordsPerPlayer} setSecondsPerRound={this.setSecondsPerRound} /> : null}
+                    {(this.state.gamePrepared === 1) ? <WordForm players={this.state.teams.team1.players.concat(this.state.teams.team2.players)} wordsPerPlayer={this.state.wordsPerPlayer} addWords={this.addWords} gamePrepared={this.gamePrepared} startGame={this.startGame} /> : null}
+                    {(this.state.gamePrepared === 2) ? <StartGame StartGame={this.startGame} /> : null}
+                    {(this.state.round > 0 && this.state.showGame === false) ? <NextTeam nextTeam={this.nextTeam} round={this.state.round} /> : null}
+                    {this.state.showGame ? <WordList list={this.state.currentList} shuffleCurrentList={this.shuffleCurrentList} addScore={this.addScore} setShowGame={this.setShowGame} flipCurrentTeam={this.flipCurrentTeam} currentTeam={this.state.currentTeam} nextRound={this.nextRound} round={this.state.round} secondsPerRound={this.state.secondsPerRound} /> : null}
+                </div>
+                <div className="container-fluid game-info">
+                    <div className='row p-3'>
+                        <div className='score-team col'>
+                            <span>Equipo 1: <strong className='score'>{this.state.teams.team1.score} puntos</strong></span>
 
-                {(this.state.gamePrepared === 0) ? <TeamForms setTeamsGame={this.setTeamsGame} gamePrepared={this.gamePrepared} setWordsPerPlayer={this.setWordsPerPlayer} setSecondsPerRound={this.setSecondsPerRound} /> : null}
-                {(this.state.gamePrepared === 1) ? <WordForm players={this.state.teams.team1.players.concat(this.state.teams.team2.players)} wordsPerPlayer={this.state.wordsPerPlayer} addWords={this.addWords} gamePrepared={this.gamePrepared} startGame={this.startGame} /> : null}
-                {(this.state.gamePrepared === 2) ? <StartGame StartGame={this.startGame} /> : null}
-                {(this.state.round > 0 && this.state.showGame === false) ? <NextTeam nextTeam={this.nextTeam} round={this.state.round} /> : null}
-                {this.state.showGame ? <WordList list={this.state.currentList} shuffleCurrentList={this.shuffleCurrentList} addScore={this.addScore} setShowGame={this.setShowGame} flipCurrentTeam={this.flipCurrentTeam} currentTeam={this.state.currentTeam} nextRound={this.nextRound} round={this.state.round} secondsPerRound={this.state.secondsPerRound} /> : null}
-                <div className="game-info">
-                    <div className='scores'>
-                        <div className='score-team'>Equipo 1:
-                            <strong className='score'>{this.state.teams.team1.score}</strong>
                         </div>
-                        <div className='score-team'>Equipo 2:
-                            <strong className='score'>{this.state.teams.team2.score}</strong>
+                        <div className='score-team col'>
+                            <span>Equipo 2: <strong className='score'>{this.state.teams.team2.score} puntos</strong></span>
+
                         </div>
                     </div>
+
                 </div>
             </div>
+
         );
     }
 }
 
 
-class StartGame extends React.Component {
-    render() {
-        return (
-            <button className='start-button' onClick={this.props.StartGame}>Start Game</button>
-        );
-    }
+function StartGame(props) {
+    return (
+        <div className='start-game-btn'>
+            <button className='start-button btn btn-primary' onClick={props.StartGame}>Start Game</button>
+        </div>
+        
+    );
 }
 
-class NextTeam extends React.Component {
-    render() {
-        return (
+
+function NextTeam(props) {
+    return (
         <div>
-            <h1>Ronda {this.props.round}</h1>
-            <button className='next-team-button' onClick={this.props.nextTeam}>Next team</button>
+            <h1>Ronda {props.round}</h1>
+            <button className='next-team-button' onClick={props.nextTeam}>Next team</button>
         </div>
 
-        );
-    }
+    );
 }
 
 // ========================================
