@@ -35,6 +35,14 @@ nav {
     border-top: 1px solid black;
 }
 
+.game-board{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .pre-game{
     overflow-y: auto;
 }
@@ -75,6 +83,14 @@ nav {
 }
 
 .start-game-btn{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.next-team-btn{
     display: flex;
     justify-content: center;
     flex-direction: column;

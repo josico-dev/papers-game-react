@@ -481,9 +481,9 @@ function StartGame(props) {
 
 function NextTeam(props) {
     return (
-        <div>
+        <div className='next-team-btn'>
             <h1>Ronda {props.round}</h1>
-            <button className='next-team-button' onClick={props.nextTeam}>Next team</button>
+            <button className='btn btn-primary next-team-button' onClick={props.nextTeam}>Next team</button>
         </div>
 
     );
